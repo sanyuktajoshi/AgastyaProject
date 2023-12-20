@@ -1,0 +1,98 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}ProjectSync{% endblock %}</title>
+  <!-- <link rel="stylesheet" href="{% static 'css/style.css' %}"> -->
+  <style>
+   /* CSS */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #3D405B;
+      padding: 10px 20px;
+    }
+
+    .navbar-right,
+    .navbar-left {
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar-right a,
+    .navbar-left a {
+      text-decoration: none;
+      color: #F4F1DE;
+      margin: 0 10px;
+      font-size: 16px;
+    }
+
+    .navbar-right input {
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+
+    .navbar-right input:focus {
+      outline: none;
+      border-color: #04AA6D;
+    }
+
+    /* Additional styling */
+    .navbar {
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-right a,
+    .navbar-left a {
+      transition: color 0.2s ease;
+    }
+
+    .navbar-right a:hover,
+    .navbar-left a:hover {
+      color: #0D1B2A;
+    }
+
+    .navbar-right input {
+      width: 200px;
+    }
+
+  </style>
+</head>
+<body>
+  <!-- HTML -->
+<nav class="navbar">
+
+  {% if user.is_authenticated %}
+  <div class="navbar-right">
+    <a href="{% url 'home' %}">IdeaVault</a>
+    <a href="">Explore</a>
+    <a href="">My Feed</a>
+  </div>
+  <div class="navbar-left">
+    {% if isContrib %}
+    <a href="">Approvals</a>
+    {% endif %}
+    <a href="">Hi {{ user.username }}!</a>
+    <a href="{% url 'logout' %}">Logout</a>
+  </div>
+
+  {% else %}  
+  <div class="navbar-right">
+    <a href="{% url 'home' %}">ProjectSync</a>
+    <a href="">Explore</a>
+  </div>
+  <div class="navbar-left">
+    <a href="{% url 'login' %}">Login/Register</a>
+  </div>
+  {% endif %}
+
+</nav>
+
+  {% block content %}
+  {% endblock %}
+</body>
+</html>

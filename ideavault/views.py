@@ -73,3 +73,6 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return render(request,'home.html',{"isUniv":False})
+
+def upload_project(request):
+    return render(request,'uploadForm.html')

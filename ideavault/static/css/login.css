@@ -2,7 +2,7 @@
   box-sizing: border-box;
 }
 input[name="fullname"],
-input[name="univ"] {
+input[name="school"] {
   display: none;
 }
 body, .container, form, .sections, .signup, .login {
@@ -10,7 +10,7 @@ body, .container, form, .sections, .signup, .login {
 }
 
 body {
-	background: white;
+	background: #3D405B;
   margin: 0;
   padding: 0;
   font-size: 1em;
@@ -55,7 +55,7 @@ form {
   right: -400px;
   width: 440px;
   height: 600px;
-  background: white;
+  background:#F4F1DE;
   position: absolute;
   flex-direction: column;
   justify-content: flex-end;
@@ -84,11 +84,12 @@ button {
   font-size: 1.2em;
   outline: none;
   border: none;
-  color: white;
+  color: #3D405B;
 }
 
 button.formButton {
-  background: #3A8EFF;
+  background: #3D405B;
+  color: #F4F1DE;
   font-weight: 500;
   margin-bottom: 80px;
 	margin-top: 40px;

@@ -1,6 +1,6 @@
 $(document).ready(function() {
   // Hide school name field when the page is ready
-  // $("input[name*='school']").hide();
+  $("input[name='school']").fadeOut(0);
 });
 $(".outline").on('click', function(e){
   e.preventDefault();

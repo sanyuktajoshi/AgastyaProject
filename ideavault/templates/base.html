@@ -75,6 +75,8 @@
   <div class="navbar-left">
     {% if isContrib %}
     <a href="">Approvals</a>
+    {% else %}
+    <a href="{% url 'uploadForm' %}">Upload Project</a>
     {% endif %}
     <a href="">Hi {{ user.username }}!</a>
     <a href="{% url 'logout' %}">Logout</a>
@@ -82,7 +84,7 @@
 
   {% else %}  
   <div class="navbar-right">
-    <a href="{% url 'home' %}">ProjectSync</a>
+    <a href="{% url 'home' %}">IdeaVault</a>
     <a href="">Explore</a>
   </div>
   <div class="navbar-left">

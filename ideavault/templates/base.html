@@ -4,7 +4,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>{% block title %}ProjectSync{% endblock %}</title>
+  <title>{% block title %}IdeaVault{% endblock %}</title>
   <!-- <link rel="stylesheet" href="{% static 'css/style.css' %}"> -->
   <style>
    /* CSS */
@@ -69,7 +69,7 @@
   {% if user.is_authenticated %}
   <div class="navbar-right">
     <a href="{% url 'home' %}">IdeaVault</a>
-    <a href="">Explore</a>
+    <a href="{% url 'explore' %}">Explore</a>
     <a href="">My Feed</a>
   </div>
   <div class="navbar-left">
@@ -85,7 +85,7 @@
   {% else %}  
   <div class="navbar-right">
     <a href="{% url 'home' %}">IdeaVault</a>
-    <a href="">Explore</a>
+    <a href="{% url 'explore' %}">Explore</a>
   </div>
   <div class="navbar-left">
     <a href="{% url 'login' %}">Login/Register</a>

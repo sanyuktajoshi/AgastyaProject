@@ -1,3 +1,5 @@
 from django.contrib import admin
-
-# Register your models here.
+from ideavault.models import Student, Contributor, Project 
+admin.site.register(Student)
+admin.site.register(Contributor)
+admin.site.register(Project)

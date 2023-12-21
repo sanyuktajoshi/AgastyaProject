@@ -122,31 +122,26 @@
             {% csrf_token %}
             <div class="form-group">
                 <label for="projectName">Project Name *</label>
-                <input type="text" class="form-control" id="projectName"  placeholder="Example: Air Purifier" name="project_title" required>
+                <input type="text" class="form-control" name="projectName" id="projectName"  placeholder="Example: Air Purifier" name="project_title" required>
             </div>
 
             <div class="form-group">
                 <label for="overview">Project Summary</label>
-                <textarea class="form-control" id="overview" rows="4" name="project_summary" placeholder="Example:Introducing our Air Purifier project—a cost-effective solution for improving indoor air quality. This initiative allows individuals to create personalized air purifiers using readily available materials like fans and HEPA filters. Tailored to specific spaces and needs, our DIY air purifiers provide an accessible and impactful way to enhance air cleanliness in homes and offices. Through this project we are promoting community health, environmental awareness, and empowering individuals to take control of their indoor environments.
+                <textarea class="form-control" name="overview" id="overview" rows="4" name="project_summary" placeholder="Example:Introducing our Air Purifier project—a cost-effective solution for improving indoor air quality. This initiative allows individuals to create personalized air purifiers using readily available materials like fans and HEPA filters. Tailored to specific spaces and needs, our DIY air purifiers provide an accessible and impactful way to enhance air cleanliness in homes and offices. Through this project we are promoting community health, environmental awareness, and empowering individuals to take control of their indoor environments.
                 "></textarea>
             </div>  
             <div class="form-group">
                 <label for="image">Project Image *</label>
                 <input type="file" class="form-control-file" id="image" name="image" accept="image/*" required>
             </div>
-
-            <!-- New div for collaborator tags -->
-            <div class="tag-list" id="collaboratorTags"></div>
-            <input type="hidden" name="collaborator_list" id="collaboratorTagsInput" value="">
-
             <div class="form-group">
-                <label for="Link">Necessary links *</label>
-                <input type="text" class="form-control" name="github_link" id="githubLink"  placeholder="Example: https://github.com/<username>/<repo name>" required>
+                <label for="links">Necessary links *</label>
+                <input type="text" class="form-control" name="links" id="links"  placeholder="Example: https://github.com/<username>/<repo name>" required>
             </div>
 
             <div class="form-group">
                 <label for="fundsNeeded">Funds Needed *</label>
-                <input type="number" class="form-control" id="fundsNeeded" name="funds_needed" placeholder="Enter the amount" step="100" required>
+                <input type="number" class="form-control" id="fundsNeeded" name="fundsNeeded" placeholder="Enter the amount" step="100" required>
             </div>
 
             <button type="submit" class="btn btn-submit">Submit Project Details</button>

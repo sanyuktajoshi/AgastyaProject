@@ -11,6 +11,9 @@ from django.utils import timezone
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
+from django.shortcuts import get_object_or_404, redirect
+from .models import Project, Contributor
+from django.contrib import messages
 
 def user_login(request):
     isContrib=False
@@ -93,3 +96,40 @@ def explore(request):
     projects = Project.objects.all
     return render(request, 'exploreProjects.html', {'projects': projects})
 
+def projectDetails(request, pk):
+    project=Project.objects.get(pk=pk)
+    isContrib=False
+    if request.user.is_authenticated:
+        if hasattr(request.user, 'contributor'):
+            isContrib=True
+    return render(request, 'projectDetails.html', {'project' : project,'isContrib':isContrib})
+
+def become_mentor(request, pk):
+    project = get_object_or_404(Project, pk=pk)
+    contributor = Contributor.objects.get(user=request.user)
+
+    # Set the is_mentor field to True for the contributor
+    contributor.is_mentor = True
+    contributor.save()
+    messages.success(request, 'You are now a mentor!')
+    # Add the contributor to the mentors of the project
+    project.mentors.add(contributor)
+    project.save()
+
+    return redirect('projectDetails', pk=pk)  # Redirect to the project details page
+
+def become_sponsor(request, pk):
+    project = get_object_or_404(Project, pk=pk)
+    contributor = Contributor.objects.get(user=request.user)
+
+    # Set the is_sponsor field to True for the contributor
+    contributor.is_sponsor = True
+    isSponsor=contributor.is_sponsor
+    contributor.save()
+    
+    messages.success(request, 'You are now a sponsor!')
+    # Add the contributor to the sponsors of the project
+    project.sponsors.add(contributor)
+    project.save()
+
+    return redirect('projectDetails', pk=pk)  # Redirect to the project details page

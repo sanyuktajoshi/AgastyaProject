@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "nav.html" %}
 {% block content %}
 {% load static %}
 
@@ -141,7 +141,7 @@
 
             <div class="form-group">
                 <label for="fundsNeeded">Funds Needed *</label>
-                <input type="number" class="form-control" id="fundsNeeded" name="fundsNeeded" placeholder="Enter the amount" step="100" required>
+                <input type="number" class="form-control" id="fundsNeeded" name="fundsNeeded" placeholder="Enter the amount" step="1" required>
             </div>
 
             <button type="submit" class="btn btn-submit">Submit Project Details</button>

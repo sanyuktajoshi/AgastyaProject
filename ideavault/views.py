@@ -15,8 +15,10 @@ from django.shortcuts import get_object_or_404, redirect
 from .models import Project, Contributor
 from django.contrib import messages
 
+
+
 def user_login(request):
-    isContrib=False
+    isStud=False
     if request.method == "POST":
         if "login" in request.POST:
             print("Entered Login")
@@ -32,10 +34,11 @@ def user_login(request):
                     login(request,user)
                     
                     if Student.objects.filter(user=user).exists():
-                        return render(request,'home.html',{"isContrib":isContrib})
+                        isStud=True
+                        return render(request,'home.html',{"isStud":isStud})
                     else:
-                        isContrib=True
-                        return render(request,'home.html',{"isContrib":isContrib})
+                        
+                        return render(request,'home.html',{"isStud":isStud})
                             
         if "mentorsignup" in request.POST:
             print("Entered Contributor Signup")
@@ -74,8 +77,10 @@ def user_login(request):
     return render(request, 'login.html')
 
 def user_logout(request):
+    
     logout(request)
     return render(request,'home.html',{"isUniv":False})
+
 
 def upload_project(request):
     if request.method=='POST':
@@ -111,7 +116,7 @@ def become_mentor(request, pk):
     # Set the is_mentor field to True for the contributor
     contributor.is_mentor = True
     contributor.save()
-    messages.success(request, 'You are now a mentor!')
+    
     # Add the contributor to the mentors of the project
     project.mentors.add(contributor)
     project.save()
@@ -126,24 +131,20 @@ def become_sponsor(request, pk):
     contributor.is_sponsor = True
     isSponsor=contributor.is_sponsor
     contributor.save()
-    
-    messages.success(request, 'You are now a sponsor!')
     # Add the contributor to the sponsors of the project
     project.sponsors.add(contributor)
     project.save()
 
     return redirect('projectDetails', pk=pk)  # Redirect to the project details page
 
-from django.shortcuts import render
-from .models import Student, Contributor, Project
-
 def profile(request):
     
     if not request.user.is_authenticated:
         return render(request, 'login_required.html')
 
-    isStudent=False
+    #isStudent=False
     current_user = request.user
+    
 
     try:
         # Check if the user is a Student
@@ -156,15 +157,19 @@ def profile(request):
 
     except Student.DoesNotExist:
         try:
+            isStudent=False
             # Check if the user is a Contributor
             contrib_profile = Contributor.objects.get(user=current_user)
             isMentor=contrib_profile.is_mentor
             isSponsor=contrib_profile.is_sponsor
-            profile=contrib_profile.user
+            Profile=contrib_profile.user
             contrib_name = contrib_profile.user.username
             projects = Project.objects.filter(mentors=contrib_profile) | Project.objects.filter(sponsors=contrib_profile)
             projects = projects.distinct()
-            return render(request, 'studentprofile.html', {'profile':profile,'name': contrib_name, 'projects': projects, 'isMentor':isMentor,'isSponsor':isSponsor})
+            # print(contrib_profile) 
+            return render(request, 'studentprofile.html', {'profile':contrib_profile,'name': contrib_name, 'isStudent':isStudent,'projects': projects, 'isMentor':isMentor,'isSponsor':isSponsor})
+            
 
         except Contributor.DoesNotExist:
             return render(request, 'profile_not_found.html')
+

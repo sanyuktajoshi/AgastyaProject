@@ -73,15 +73,12 @@
     <a href="">My Feed</a>
   </div>
   <div class="navbar-left">
-    {% if isContrib %}
-    <a href="">Approvals</a>
-    {% else %}
+    {% if isStud %}
     <a href="{% url 'uploadForm' %}">Upload Project</a>
     {% endif %}
     <a href="{% url 'profile' %}">Hi {{ user.username }}!</a>
     <a href="{% url 'logout' %}">Logout</a>
   </div>
-
   {% else %}  
   <div class="navbar-right">
     <a href="{% url 'home' %}">IdeaVault</a>

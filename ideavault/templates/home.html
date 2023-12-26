@@ -1,13 +1,6 @@
-{% extends "base.html" %} {% block content %} {% load static %}
-<!-- {% csrf_token %} -->
-<!-- {% if user.is_authenticated %}
-  Hi {{ user.username }}!
-  <a href="{% url 'logout' %}">Click here to logout</a>
-{% else %}
-  <p>You are not logged in</p>
-  <a href="{% url 'login' %}">Log In/SignUp</a>
-  
-{% endif %} -->
+{% extends "nav.html" %} {% block content %} {% load static %}
+{% csrf_token %}
+
 
 <!-- Bootstrap CSS -->
 <link
@@ -17,6 +10,8 @@
   crossorigin="anonymous"
 />
 
+<!-- <p>User is authenticated: {{ user.is_authenticated }}</p>
+<p>Is contributor: {{ isContrib }}</p> -->
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">

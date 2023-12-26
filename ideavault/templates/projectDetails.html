@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% block content %} {% load static %}
+{% extends "nav.html" %} {% block content %} {% load static %}
 
 <title>Project Details</title>
 <meta charset="utf-8" />
@@ -41,6 +41,75 @@
       right: 10px;
       cursor: pointer;
   }
+  .funds p{
+      
+  }
+  .loader{
+    margin: 20px auto 30px;
+    width: 80%;
+    height: 25px;
+    border-radius: 14px;
+    border-bottom: 1px solid #fff;
+    border-top: 1px solid #F2CC8F;
+    background: #F2CC8F;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .loader.gray{
+    background: #999;
+  }
+  .progress-bar{
+    height: inherit;
+    width: 40%;
+    border-radius: inherit;
+    position: relative;
+    overflow: hidden;
+  }
+  .progress-stripes{
+    width: inherit;
+    height: inherit;
+    font-size: 180px;
+    font-weight: bold;
+    margin-top: -50px;
+    letter-spacing: -14px;
+  }
+  .percentage{
+    position: absolute;
+    top: 4px;
+    right: 5px;
+    font-weight: bold;
+    font-size: 16px;
+  } 
+  span{
+    color: #888;
+    text-shadow: 0 1px 0 #fff;
+  }
+  
+  span.loaded.red{
+    color: #c0392b;
+  }
+  
+  span.loaded.blue{
+    color: #2980b9;
+  }
+  
+  span.loaded.green{
+    color: #27ae60;
+  }
+  
+  span.loaded.yellow{
+    color: #d35400;
+  }
+  
+  span.loaded.purple{
+    color: #8e44ad;
+  }
+  
+  span.loaded.gray{
+    color: #444;
+  }
+ 
 </style>
 
 <link rel="stylesheet" href="{% static 'css/projectDetails.css' %}" />
@@ -130,6 +199,14 @@
         </div>
       </div>
       <!-- /.row -->
+    <!-- actual preloader -->
+    
+    <div class="funds">
+      <center><p><strong>Funding Goal: </strong>₹{{project.funds_needed}}</p></center>
+    </div>
+      <div class="loader">
+        <div class="progress-bar"><div class="progress-stripes"></div><div class="percentage">₹1000</div></div>
+      </div>
       <div class="modal-footer center">
         <button
           type="button"

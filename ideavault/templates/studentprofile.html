@@ -36,7 +36,7 @@
                     </li>
                     {% if isStudent %}
                     <li>
-                        <a class="menu-box-tab" href="#8">Upload Project</a>                            
+                        <a class="menu-box-tab" href="{% url 'uploadForm' %}">Upload Project</a>                            
                     </li>
                     {% endif %}
                     <li>
@@ -66,7 +66,7 @@
                         <tr>
                           <th scope="col">Project</th>
                           {%if isStudent %}
-                          <th scope="col">College</th>
+                          <th scope="col">School</th>
                           {% else %}
                           <th scope="col">Role</th>
                           {% endif %}
@@ -91,16 +91,22 @@
                                 </div>
                             </th>
                             <td>
-                              {%if isStudent%}
-                                <span class="badge badge-pill badge-info">{{ project.student.school }}</span>
-                              {% else %}
-                                {% if name in project.mentors.all %}
-                                  <span class="badge badge-pill badge-info">Mentoring</span>
-                                {%endif%}
-                                {% if name in project.sponsors.all %}
-                                  <span class="badge badge-pill badge-info">Sponsoring</span>
-                                {%endif%}
-                              {% endif %}                   
+                              {% if isStudent %}
+                              <span class="badge badge-pill badge-info">{{ school }}</span>
+                              
+                          {% else %}
+                              
+                    
+                              
+                                  {% if isMentor and profile in project.mentors.all %}
+                                      <span class="badge badge-pill badge-info">Mentoring</span>
+                                  {% endif %}
+                                
+                                  {% if isSponsor and profile in project.sponsors.all %}
+                                      <span class="badge badge-pill badge-info">Sponsoring</span>
+                                  {% endif %}
+                              
+                          {% endif %}              
                           </td>
                             <td>
                                 <span class="badge badge-dot mr-4">

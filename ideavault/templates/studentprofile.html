@@ -1,0 +1,191 @@
+
+{% block content %}
+{% load static %}
+{% csrf_token %}
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/studentprofile.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <title>Document</title>
+
+    <div class="main-container">
+        <!-- LEFT-CONTAINER -->
+        <div class="left-container container">
+            <div class="profile block"> <!-- PROFILE (MIDDLE-CONTAINER) -->
+                <a class="add-button" href="#28"><span class="icon entypo-plus scnd-font-color"></span></a>
+                <div class="profile-picture big-profile-picture clear">
+                    <img width="150px" alt="Anne Hathaway picture" src="{%static 'images/explore_images/userpic.avif' %}" >
+                </div>
+                <h1 class="user-name">{{ name }}</h1>
+                <ul class="profile-options horizontal-list">
+                    <li><a class="comments" href="#40"><p>23<br>Followers</li></p></a>
+                    <li><a class="views" href="#41"><p></span>841<br>Following</li></p></a>
+                    <li><a class="likes" href="#42"><p>49<br>Projects</li></p></a>
+                </ul>
+            </div>
+            <div class="menu-box block"> <!-- MENU BOX (LEFT-CONTAINER) -->
+                <h2 class="titular">MENU BOX</h2>
+                <ul class="menu-box-menu">
+                  <li>
+                    <a class="menu-box-tab" href="{% url 'home' %}">Home</a>                            
+                </li>
+                    <li>
+                        <a class="menu-box-tab" href="{% url 'explore' %}">Explore</a>                            
+                    </li>
+                    {% if isStudent %}
+                    <li>
+                        <a class="menu-box-tab" href="#8">Upload Project</a>                            
+                    </li>
+                    {% endif %}
+                    <li>
+                        <a class="menu-box-tab" href="#9">Requests<div class="menu-box-number">5</div></a>                            
+                    </li>
+                    <li>
+                        <a class="menu-box-tab" href="{% url 'logout' %}">Logout</a>
+                    </li>                      
+                </ul>
+            </div>
+        </div>
+
+        <!-- RIGHT-CONTAINER -->
+        <div class="right-container container">
+            <div class="col">
+                <div class="card shadow">
+                  <div class="card-header border-0" style = "text-align:center;">
+                    {% if isStudent %}
+                    <h2 class="mb-0"><center>Your Projects</center></h2>
+                    {% else %}
+                    <h2 class="mb-0"><center>Projects You Follow</center></h2>
+                    {% endif %}
+                  </div>
+                  <div class="table-responsive">
+                    <table class="table align-items-center table-flush">
+                      <thead class="thead-light">
+                        <tr>
+                          <th scope="col">Project</th>
+                          {%if isStudent %}
+                          <th scope="col">College</th>
+                          {% else %}
+                          <th scope="col">Role</th>
+                          {% endif %}
+                          <th scope="col">Status</th>
+                          <th scope="col">Contributors</th>
+                          <th scope="col">Student</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for project in projects %}
+                        <tr>
+                            <th scope="row">
+                                <div class ="media align-items-center">
+                                    <a href="{% url 'projectDetails' pk=project.pk %}" class="avatar rounded-circle mr-3">
+                                        <img alt="Image placeholder" src="https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/img/theme/bootstrap.jpg">
+                                    </a>  
+                                    <div class="media-body">
+                                        <a href ="{% url 'projectDetails' pk=project.pk %}">
+                                            <span class="mb-0 text-sm">{{ project.name }}</span>
+                                        </a>                                    
+                                    </div>
+                                </div>
+                            </th>
+                            <td>
+                              {%if isStudent%}
+                                <span class="badge badge-pill badge-info">{{ project.student.school }}</span>
+                              {% else %}
+                                {% if name in project.mentors.all %}
+                                  <span class="badge badge-pill badge-info">Mentoring</span>
+                                {%endif%}
+                                {% if name in project.sponsors.all %}
+                                  <span class="badge badge-pill badge-info">Sponsoring</span>
+                                {%endif%}
+                              {% endif %}                   
+                          </td>
+                            <td>
+                                <span class="badge badge-dot mr-4">
+                                  <i class="bg-warning"></i> pending
+                                </span>
+                            </td>
+                            <td>
+                                <div class="avatar-group">
+                                  <a href="#" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Ryan Tompson">
+                                    <img src="{%static 'images/explore_images/face1.jpg' %}" alt = "Image 1">
+                                  </a>
+                                  <a href="#" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Romina Hadid">
+                                      <img src="{%static 'images/explore_images/face2.jpg' %}" alt = "Image 1">
+                                  </a>
+                                  <a href="#" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Alexander Smith">
+                                      <img src="{%static 'images/explore_images/face3.jpg' %}" alt = "Image 1">
+                                  </a>
+                                  <a href="#" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Jessica Doe">
+                                      <img src="{%static 'images/explore_images/face4.jpeg' %}" alt = "Image 1">
+                                  </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="media-body">
+                                    <span class="mb-0 text-sm">{{ project.student }}</span>
+                                </div>
+                            </td>
+                        </tr>
+                      {% endfor %}
+                      <tr>
+                        <th scope="row">
+                          <div class="media align-items-center">
+                            <a href="#" class="avatar rounded-circle mr-3">
+                              <img alt="Image placeholder" src="https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/img/theme/bootstrap.jpg">
+                            </a>
+                            <div class="media-body">
+                              <span class="mb-0 text-sm">ProjectsSync</span>
+                            </div>
+                          </div>
+                        </th>
+                        <td>
+                            <span class="badge badge-pill badge-info"><i class="icofont-ui-calendar icofont-1x"></i> &nbsp;React</span>&nbsp;&nbsp;</span><br><br>
+                            <span class="badge badge-pill badge-info"><i class="icofont-wall-clock icofont-1x"></i> &nbsp;ML</span>
+                        </td>
+                        <td>
+                          <span class="badge badge-dot mr-4">
+                            <i class="bg-warning"></i> pending
+                          </span>
+                        </td>
+                        <td>
+                          <div class="avatar-group">
+                            <a href="#" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Ryan Tompson">
+                              <img src="{%static 'images/explore_images/face1.jpg' %}" alt = "Image 1">
+                            </a>
+                            <a href="#" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Romina Hadid">
+                                <img src="{%static 'images/explore_images/face2.jpg' %}" alt = "Image 1">
+                            </a>
+                            <a href="#" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Alexander Smith">
+                                <img src="{%static 'images/explore_images/face3.jpg' %}" alt = "Image 1">
+                            </a>
+                            <a href="#" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Jessica Doe">
+                                <img src="{%static 'images/explore_images/face4.jpeg' %}" alt = "Image 1">
+                            </a>
+                          </div>
+                        </td>
+                        <td>
+                            <div class="media-body">
+                                <span class="mb-0 text-sm">K J Somaiya College of Engineering</span>
+                            </div>
+                          <!-- <div class="d-flex align-items-center">
+                            <span class="mr-2">60%</span>
+                            <div>
+                              <div class="progress">
+                                <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
+                              </div>
+                            </div>
+                          </div> -->
+                        </td>                    
+                      </tr>
+                    </tbody>
+                    </table>
+                    
+                  </div>            
+                </div>
+              </div>
+        </div> <!-- end right-container -->
+    </div> <!-- end main-container -->
+{% endblock %}

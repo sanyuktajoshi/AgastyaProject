@@ -31,8 +31,3 @@ class Project(models.Model):
     def __str__(self):
         return self.name
 
-# class CollaborationRequest(models.Model):
-#     student = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='collaboration_requests')
-#     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='collaboration_requests')
-#     message = models.TextField()
-#     is_accepted = models.BooleanField(default=False)

@@ -32,7 +32,7 @@ def user_login(request):
                     login(request,user)
                     
                     if Student.objects.filter(user=user).exists():
-                        return render(request,'home.html')
+                        return render(request,'home.html',{"isContrib":isContrib})
                     else:
                         isContrib=True
                         return render(request,'home.html',{"isContrib":isContrib})
@@ -133,3 +133,38 @@ def become_sponsor(request, pk):
     project.save()
 
     return redirect('projectDetails', pk=pk)  # Redirect to the project details page
+
+from django.shortcuts import render
+from .models import Student, Contributor, Project
+
+def profile(request):
+    
+    if not request.user.is_authenticated:
+        return render(request, 'login_required.html')
+
+    isStudent=False
+    current_user = request.user
+
+    try:
+        # Check if the user is a Student
+        isStudent=True
+        student_profile = Student.objects.get(user=current_user)
+        student_name = student_profile.user.username
+        school = student_profile.school
+        projects = Project.objects.filter(student=student_profile)
+        return render(request, 'studentprofile.html', {'name': student_name, 'projects': projects, 'school': school,'isStudent':isStudent})
+
+    except Student.DoesNotExist:
+        try:
+            # Check if the user is a Contributor
+            contrib_profile = Contributor.objects.get(user=current_user)
+            isMentor=contrib_profile.is_mentor
+            isSponsor=contrib_profile.is_sponsor
+            profile=contrib_profile.user
+            contrib_name = contrib_profile.user.username
+            projects = Project.objects.filter(mentors=contrib_profile) | Project.objects.filter(sponsors=contrib_profile)
+            projects = projects.distinct()
+            return render(request, 'studentprofile.html', {'profile':profile,'name': contrib_name, 'projects': projects, 'isMentor':isMentor,'isSponsor':isSponsor})
+
+        except Contributor.DoesNotExist:
+            return render(request, 'profile_not_found.html')

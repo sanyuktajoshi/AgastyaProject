@@ -12,5 +12,7 @@ urlpatterns = [
     path('projectDetails/<int:pk>/',views.projectDetails, name="projectDetails"),
     path('project/<int:pk>/become-mentor/', views.become_mentor, name='become_mentor'),
     path('project/<int:pk>/become-sponsor/', views.become_sponsor, name='become_sponsor'),
-    path('', TemplateView.as_view(template_name='home.html'), name='home'),         
+    path('profile/',views.profile,name="profile"),
+    path('',TemplateView.as_view(template_name='home.html'),name="home"),
+    # path('', TemplateView.as_view(template_name='home.html'), name='home'),         
 ]

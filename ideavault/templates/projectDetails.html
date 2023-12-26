@@ -71,7 +71,7 @@
           <ul class="contributors">
             {% for mentor in project.mentors.all %}
             <li>
-              <img src="https://avatars.githubusercontent.com/u/1?v=4" />
+              <img src="{% static 'images\explore_images\userpic.avif' %}" />
               <a href="https://github.com/1">{{ mentor.user.username }}</a>
             </li>
             {% endfor %}
@@ -81,7 +81,7 @@
           <ul class="contributors">
             {% for sponsor in project.sponsors.all %}
                 <li>
-                    <img src="{% static 'images/home_images/3.png' %}" />
+                    <img src="{% static 'images\explore_images\userpic.avif' %}" />
                     <a href="https://github.com/1">{{ sponsor.user.username }}</a>
                 </li>
             {% endfor %}

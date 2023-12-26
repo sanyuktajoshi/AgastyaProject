@@ -78,7 +78,7 @@
     {% else %}
     <a href="{% url 'uploadForm' %}">Upload Project</a>
     {% endif %}
-    <a href="">Hi {{ user.username }}!</a>
+    <a href="{% url 'profile' %}">Hi {{ user.username }}!</a>
     <a href="{% url 'logout' %}">Logout</a>
   </div>
 

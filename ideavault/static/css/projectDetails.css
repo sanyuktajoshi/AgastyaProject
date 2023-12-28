@@ -8,12 +8,12 @@ html {
   background-color: #415A77;
 }
 body {
-  color: #1B263B;
+  color: #81B29A;
   font-family: 'Work Sans', helvetica, sans-serif;
   font-size: 1rem;
   font-weight: 300;
   line-height: 1.5;
-  background-color: #415A77;
+  background-color: #81B29A;
 }
 h1 {
   font-family: 'Unica One', cursive;
@@ -45,7 +45,7 @@ hr {
 
 /* Fixed Menu */
 .menu-fixed {
-  background-color: #415A77;
+  background-color: #81B29A;
   background-color: rgba(255,254,253,0.97);
   border-radius: 0;
   box-shadow: 0 3px 9px rgba(8,33,30,0.15);

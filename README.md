@@ -1,4 +1,4 @@
-# IdeaVault Django Project
+# IdeaVault
 ![image](https://github.com/sanyuktajoshi/AgastyaProject/assets/79038075/cfd33970-93e9-4afd-8784-68607ce50d29)
 
 Welcome to IdeaVault, a Django-based platform that empowers students to showcase their project ideas and connect with mentors/sponsors. This README file provides essential information to help you understand, set up, and contribute to the IdeaVault project.
